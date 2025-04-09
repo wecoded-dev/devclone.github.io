@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEV Challenge Billboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: 'VT323', monospace;
+    }
+
+    .billboard {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+      max-width: 700px;
+      margin: 40px auto;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .billboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .billboard-header h5 {
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .billboard-header h5 span {
+      margin-left: 10px;
+    }
+
+    .billboard-header button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .billboard-image {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .billboard-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .billboard-content {
+      margin-top: 20px;
+    }
+
+    .dev-box {
+      background-color: #262626;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+      border: 1px solid #444;
+    }
+
+    .dev-logo {
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
+
+    .dev-content {
+      flex: 1;
+    }
+
+    .hashtags {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="billboard" id="devBillboard">
+    <div class="billboard-header">
+      <h5><span>👋</span> <span>DEV Challenges</span></h5>
+      <button onclick="closeBillboard()">&times;</button>
+    </div>
+
+    <div class="billboard-image">
+      <a href="https://dev.to/devteam/join-us-for-the-alibaba-cloud-web-game-challenge-3000-in-prizes-1f2b" target="_blank">
+        <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--U5V9SgAA--/c_limit,f_auto,fl_progressive,q_80,w_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wsh9ec6e8vco62h3wq9y.png" alt="Challenge Banner">
+      </a>
+    </div>
+
+    <div class="billboard-content">
+      <h3>Push browser boundaries!</h3>
+      <div class="dev-box">
+        <div class="dev-logo">DEV</div>
+        <div class="dev-content">
+          <strong>Join us for the Alibaba Cloud Web Game Challenge: $3,000 in Prizes!</strong>
+          <div style="font-size: 0.9rem; margin-top: 4px;">dev.to staff for The DEV Team • Apr 2</div>
+          <div class="hashtags">
+            #devchallenge #alibabachallenge #webdev #cloud
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 20px; font-size: 1.2rem;">Happy Coding!</p>
+    </div>
+  </div>
+
+  <script>
+    function closeBillboard() {
+      document.getElementById('devBillboard').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
