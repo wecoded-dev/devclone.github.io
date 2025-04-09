@@ -324,3 +324,149 @@
 </body>
 </html>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DEV.to Posts by Hanzla Baig</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #121212;
+      font-family: 'Inter', sans-serif;
+      color: #f1f1f1;
+      padding: 2rem;
+    }
+
+    .post-card {
+      background-color: #1e1e1e;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease;
+    }
+
+    .post-card:hover {
+      transform: scale(1.02);
+    }
+
+    .post-card img.cover {
+      width: 100%;
+      height: auto;
+    }
+
+    .post-card-body {
+      padding: 1.5rem;
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .post-description {
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .tags {
+      margin-bottom: 1rem;
+    }
+
+    .tags span {
+      background-color: #292929;
+      color: #d1d1d1;
+      padding: 6px 12px;
+      font-size: 0.875rem;
+      border-radius: 999px;
+      margin-right: 6px;
+      display: inline-block;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .author-info small {
+      color: #aaa;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 576px) {
+      .post-card-body {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="posts-container"></div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      const username = "hanzla-baig";
+      const apiUrl = `https://dev.to/api/articles?username=${username}`;
+
+      $.get(apiUrl, function (data) {
+        data.forEach((post) => {
+          const card = `
+            <a href="${post.url}" target="_blank">
+              <div class="post-card">
+                ${post.cover_image ? `<img class="cover" src="${post.cover_image}" alt="Cover Image">` : ""}
+                <div class="post-card-body">
+                  <div class="post-title">${post.title}</div>
+                  <div class="post-description">${post.description}</div>
+                  <div class="tags">
+                    ${post.tag_list.map(tag => `<span>#${tag}</span>`).join("")}
+                  </div>
+                  <div class="author-info">
+                    <img src="${post.user.profile_image}" alt="${post.user.name}">
+                    <div>
+                      <div>${post.user.name}</div>
+                      <small>${post.reading_time_minutes} min read</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          `;
+          $("#posts-container").append(card);
+        });
+      }).fail(function () {
+        $("#posts-container").html("<p class='text-danger'>Error loading posts. Please try again later.</p>");
+      });
+    });
+  </script>
+
+</body>
+</html>
+
