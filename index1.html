@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEV.to Menu Bar Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+
+    .navbar-custom {
+      background-color: #181818;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .navbar-left, .navbar-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon, .search-icon, .bell-icon {
+      font-size: 1.4rem;
+      color: #ccc;
+      margin-right: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .menu-icon:hover, .search-icon:hover, .bell-icon:hover {
+      color: #fff;
+    }
+
+    .dev-logo {
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 0.3rem 0.6rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid #444;
+    }
+
+    .dropdown-menu-custom {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      width: 200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .dropdown-menu-custom a {
+      display: block;
+      padding: 10px;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu-custom a:hover {
+      background: #333;
+      color: white;
+    }
+
+    .side-nav {
+      height: 100vh;
+      width: 270px;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.4);
+      overflow-y: auto;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .side-nav.active {
+      left: 0;
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 12px 10px;
+      color: #ccc;
+      text-decoration: none;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .side-nav a:hover {
+      background-color: #333;
+      color: white;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 998;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar-custom">
+    <div class="navbar-left">
+      <i class="fas fa-bars menu-icon" id="menuToggle"></i>
+      <div class="dev-logo">DEV</div>
+    </div>
+    <div class="navbar-right">
+      <i class="fas fa-search search-icon"></i>
+      <i class="fas fa-bell bell-icon"></i>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile" class="profile-img" id="profileImg">
+    </div>
+    <div class="dropdown-menu-custom" id="profileDropdown">
+      <a href="#">Profile</a>
+      <a href="#">Settings</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Logout</a>
+    </div>
+  </div>
+
+  <div class="side-nav" id="sideNav">
+    <a href="#"><i class="fas fa-home me-2"></i>Home</a>
+    <a href="#"><i class="fas fa-fire me-2"></i>Trending</a>
+    <a href="#"><i class="fas fa-tag me-2"></i>Tags</a>
+    <a href="#"><i class="fas fa-book me-2"></i>Reading List</a>
+    <a href="#"><i class="fas fa-bookmark me-2"></i>Bookmarks</a>
+    <a href="#"><i class="fas fa-users me-2"></i>Community</a>
+    <a href="#"><i class="fas fa-cogs me-2"></i>Settings</a>
+    <a href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#profileImg').click(function() {
+        $('#profileDropdown').fadeToggle(200);
+      });
+
+      $('#menuToggle').click(function() {
+        $('#sideNav').toggleClass('active');
+        $('#overlay').fadeToggle();
+      });
+
+      $('#overlay').click(function() {
+        $('#sideNav').removeClass('active');
+        $('#overlay').fadeOut();
+        $('#profileDropdown').fadeOut();
+      });
+
+      $(document).click(function(e) {
+        if (!$(e.target).closest('#profileImg, #profileDropdown').length) {
+          $('#profileDropdown').fadeOut();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+&nbsp; <br> &nbsp; <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEV Challenge Billboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: 'VT323', monospace;
+    }
+
+    .billboard {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+      max-width: 700px;
+      margin: 40px auto;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .billboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .billboard-header h5 {
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .billboard-header h5 span {
+      margin-left: 10px;
+    }
+
+    .billboard-header button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .billboard-image {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .billboard-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .billboard-content {
+      margin-top: 20px;
+    }
+
+    .dev-box {
+      background-color: #262626;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+      border: 1px solid #444;
+    }
+
+    .dev-logo {
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
+
+    .dev-content {
+      flex: 1;
+    }
+
+    .hashtags {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="billboard" id="devBillboard">
+    <div class="billboard-header">
+      <h5><span>👋</span> <span>DEV Challenges</span></h5>
+      <button onclick="closeBillboard()">&times;</button>
+    </div>
+
+    <div class="billboard-image">
+      <a href="https://dev.to/devteam/join-us-for-the-alibaba-cloud-web-game-challenge-3000-in-prizes-1n5d?bb=222059" target="_blank">
+        <img src="tdu7wtkzz67tqpzexnv1.webp" alt="Challenge Banner">
+      </a>
+    </div>
+
+    <div class="billboard-content">
+      <h3>Push browser boundaries!</h3>
+      <div class="dev-box">
+        <div class="dev-logo">DEV</div>
+        <div class="dev-content">
+          <strong>Join us for the Alibaba Cloud Web Game Challenge: $3,000 in Prizes!</strong>
+          <div style="font-size: 0.9rem; margin-top: 4px;">dev.to staff for The DEV Team • Apr 2</div>
+          <div class="hashtags">
+            #devchallenge #alibabachallenge #webdev #cloud
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 20px; font-size: 1.2rem;">Happy Coding!</p>
+    </div>
+  </div>
+
+  <script>
+    function closeBillboard() {
+      document.getElementById('devBillboard').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DEV.to Posts by Hanzla Baig</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #121212;
+      font-family: 'Inter', sans-serif;
+      color: #f1f1f1;
+    }
+
+    .post-card {
+      background-color: #1e1e1e;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease;
+    }
+
+    .post-card:hover {
+      transform: scale(1.02);
+    }
+
+    .post-card img.cover {
+      width: 100%;
+      height: auto;
+    }
+
+    .post-card-body {
+      padding: 1.5rem;
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .post-description {
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .tags {
+      margin-bottom: 1rem;
+    }
+
+    .tags span {
+      background-color: #292929;
+      color: #d1d1d1;
+      padding: 6px 12px;
+      font-size: 0.875rem;
+      border-radius: 999px;
+      margin-right: 6px;
+      display: inline-block;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .author-info small {
+      color: #aaa;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 576px) {
+      .post-card-body {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="posts-container"></div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      const username = "hanzla-baig";
+      const apiUrl = `https://dev.to/api/articles?username=${username}`;
+
+      $.get(apiUrl, function (data) {
+        data.forEach((post) => {
+          const card = `
+            <a href="${post.url}" target="_blank">
+              <div class="post-card">
+                ${post.cover_image ? `<img class="cover" src="${post.cover_image}" alt="Cover Image">` : ""}
+                <div class="post-card-body">
+                  <div class="post-title">${post.title}</div>
+                  <div class="post-description">${post.description}</div>
+                  <div class="tags">
+                    ${post.tag_list.map(tag => `<span>#${tag}</span>`).join("")}
+                  </div>
+                  <div class="author-info">
+                    <img src="${post.user.profile_image}" alt="${post.user.name}">
+                    <div>
+                      <div>${post.user.name}</div>
+                      <small>${post.reading_time_minutes} min read</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          `;
+          $("#posts-container").append(card);
+        });
+      }).fail(function () {
+        $("#posts-container").html("<p class='text-danger'>Error loading posts. Please try again later.</p>");
+      });
+    });
+  </script>
+
+</body>
+</html>
