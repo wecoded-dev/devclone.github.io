@@ -1,6 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEV.to Menu Bar Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+
+    .navbar-custom {
+      background-color: #181818;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .navbar-left, .navbar-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon, .search-icon, .bell-icon {
+      font-size: 1.4rem;
+      color: #ccc;
+      margin-right: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .menu-icon:hover, .search-icon:hover, .bell-icon:hover {
+      color: #fff;
+    }
+
+    .dev-logo {
+      background: white;
+      color: black;
+      font-weight: bold;
+      padding: 0.3rem 0.6rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid #444;
+    }
+
+    .dropdown-menu-custom {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background: #1f1f1f;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      width: 200px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .dropdown-menu-custom a {
+      display: block;
+      padding: 10px;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu-custom a:hover {
+      background: #333;
+      color: white;
+    }
+
+    .side-nav {
+      height: 100vh;
+      width: 270px;
+      position: fixed;
+      top: 0;
+      left: -280px;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.4);
+      overflow-y: auto;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .side-nav.active {
+      left: 0;
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 12px 10px;
+      color: #ccc;
+      text-decoration: none;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .side-nav a:hover {
+      background-color: #333;
+      color: white;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 998;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar-custom">
+    <div class="navbar-left">
+      <i class="fas fa-bars menu-icon" id="menuToggle"></i>
+      <div class="dev-logo">DEV</div>
+    </div>
+    <div class="navbar-right">
+      <i class="fas fa-search search-icon"></i>
+      <i class="fas fa-bell bell-icon"></i>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile" class="profile-img" id="profileImg">
+    </div>
+    <div class="dropdown-menu-custom" id="profileDropdown">
+      <a href="profile.html">Profile</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="logout.html">Logout</a>
+    </div>
+  </div>
+
+  <div class="side-nav" id="sideNav">
+    <a href="#"><i class="fas fa-home me-2"></i>Home</a>
+    <a href="#"><i class="fas fa-fire me-2"></i>Trending</a>
+    <a href="#"><i class="fas fa-tag me-2"></i>Tags</a>
+    <a href="#"><i class="fas fa-book me-2"></i>Reading List</a>
+    <a href="#"><i class="fas fa-bookmark me-2"></i>Bookmarks</a>
+    <a href="#"><i class="fas fa-users me-2"></i>Community</a>
+    <a href="#"><i class="fas fa-cogs me-2"></i>Settings</a>
+    <a href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#profileImg').click(function() {
+        $('#profileDropdown').fadeToggle(200);
+      });
+
+      $('#menuToggle').click(function() {
+        $('#sideNav').toggleClass('active');
+        $('#overlay').fadeToggle();
+      });
+
+      $('#overlay').click(function() {
+        $('#sideNav').removeClass('active');
+        $('#overlay').fadeOut();
+        $('#profileDropdown').fadeOut();
+      });
+
+      $(document).click(function(e) {
+        if (!$(e.target).closest('#profileImg, #profileDropdown').length) {
+          $('#profileDropdown').fadeOut();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard</title>
